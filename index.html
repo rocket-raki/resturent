@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        .banner {
+            width: 100%;
+            height: 100vh;
+            
+            background-size: cover;
+            background-position: center;
+        }
+
+        .navbar {
+            width: 85%;
+            margin: auto;
+            padding: 35px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: aqua;
+        }
+
+        .logo {
+            width: 90px;
+            height: 90px;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid rgb(169, 189, 91);
+            box-shadow: 0px 1px 4px 1px rgb(199, 194, 194);
+        }
+
+        .navbar ul li {
+            list-style: none;
+            display: inline-block;
+            margin: 0 10px;
+            color: #080808;
+            position: relative;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: #100f0f;
+            text-transform: uppercase;
+            border: 2px solid rgb(169, 189, 91);
+            padding: 5px;
+            border-radius: 10px;
+        }
+
+        .navbar ul li::after {
+            content: '';
+            height: 3px;
+            width: 0;
+            background: yellow;
+            position: absolute;
+            left: 0;
+            bottom: -15px;
+            transition: 0.5s;
+            box-shadow: 0px 1px 4px 0px rgb(199, 194, 194);
+        }
+
+        .navbar ul li:hover::after {
+            width: 100%;
+            box-shadow: 0px 1px 2px 0px rgb(229, 227, 71);
+        }
+
+        .content {
+            width: 100%;
+            position: absolute;
+            top: 50px;
+            transform: translateY(-50);
+            text-align: center;
+            color: #0c0c0c;
+        }
+
+        .content h1 {
+            font-size: 70px;
+            margin-top: 80px;
+        }
+
+        .content p {
+            margin: 20px auto;
+            font-weight: 100;
+            line-height: 25px;
+        }
+
+        button {
+            width: 200px;
+            padding: 15px;
+            text-align: center;
+            background: transparent;
+            color: #070707;
+            cursor: pointer;
+            margin: 20px 10px;
+            border-radius: 25px;
+            border: 2px solid yellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner" id="home">
+        <div class="navbar">
+           
+            <ul>
+                <li><a href="#home">home</a></li>
+                <li><a href="#about">about us</a></li>
+                <li><a href="#menu">menu</a></li>
+                <li><a href="#contact">contact us</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="card"></div>
+            <h1>Visit our Restaurant</h1>
+            <p id="home">To taste our delicious food Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi reprehenderit iusto quod ratione ullam itaque dolorem voluptates libero soluta eveniet repudiandae, accusamus magnam nemo neque rem natus blanditiis labore quas.</p>
+            <br>
+            <h1>About Us</h1>
+            <p id="about">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate repellendus quas ratione doloremque facere ipsa dignissimos praesentium cum eos aperiam voluptatum vitae illo tempore, amet accusantium earum distinctio iure modi.</p>
+            <br>
+            <h1>Menu</h1>
+            <p id="menu">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores eum fugit, fugiat voluptates molestiae rem nesciunt soluta. Reprehenderit quam dolores incidunt exercitationem, nesciunt vero, assumenda perspiciatis expedita maiores consectetur reiciendis.</p>
+            <br>
+            <h1>Contact</h1>
+            <p id="contact">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro labore dignissimos commodi, in totam, reprehenderit sed iste corrupti ipsum nobis cupiditate accusantium assumenda quam! Perferendis provident quas impedit sapiente dignissimos!</p>
+            <br>
+            <div>
+                <button type="button">order food</button>
+                <button type="button">our location</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling to section anchors
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                window.scrollTo({
+                    top: target.offsetTop - 50, // Adjust scroll position to account for fixed navbar
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Highlight active menu item on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.content > section[id]');
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    const id = section.getAttribute('id');
+                    const menuItem = document.querySelector(`.navbar a[href="#${id}"]`);
+                    menuItem.parentNode.classList.add('active');
+                } else {
+                    const id = section.getAttribute('id');
+                    const menuItem = document.querySelector(`.navbar a[href="#${id}"]`);
+                    menuItem.parentNode.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
